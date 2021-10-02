@@ -27,6 +27,7 @@ class App
     {
         $this->createApp();
         $this->app->addRoutingMiddleware();
+        $this->app->addBodyParsingMiddleware();
         $this->configureRouter();
         $this->addErrorHandler();
     }
