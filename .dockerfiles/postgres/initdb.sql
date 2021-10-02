@@ -1,0 +1,8 @@
+BEGIN;
+
+CREATE TABLE url (
+    hash VARCHAR NOT NULL UNIQUE,
+    url VARCHAR NOT NULL
+);
+
+COMMIT;
