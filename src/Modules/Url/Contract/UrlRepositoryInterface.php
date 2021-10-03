@@ -11,6 +11,12 @@ interface UrlRepositoryInterface
     public function findUrlByHash(string $hash): ?string;
 
     /**
+     * @param string $url
+     * @return string|null
+     */
+    public function findHashByUrl(string $url): ?string;
+
+    /**
      * @param string $hash
      * @param string $url
      * @return bool

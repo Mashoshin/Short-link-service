@@ -6,14 +6,13 @@ use Exception;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use src\Domain\helpers\ResponseHelper;
-use src\Modules\Url\Service\ShortUrlService;
-use Throwable;
+use src\Modules\Url\Contract\ShortUrlServiceInterface;
 
 class UrlController
 {
-    private ShortUrlService $shortUrlService;
+    private ShortUrlServiceInterface $shortUrlService;
 
-    public function __construct(ShortUrlService $shortUrlService)
+    public function __construct(ShortUrlServiceInterface $shortUrlService)
     {
         $this->shortUrlService = $shortUrlService;
     }

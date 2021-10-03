@@ -3,26 +3,35 @@
 namespace src\Modules\Url\Service;
 
 use Exception;
+use src\Modules\Url\Contract\ShortUrlServiceInterface;
 use src\Modules\Url\Contract\UrlRepositoryInterface;
+use src\Modules\Url\Validator\UrlValidator;
 use src\Modules\Url\ValueObject\ShortUrl;
 use src\Modules\Url\ValueObject\Url;
 
-class ShortUrlService
+class ShortUrlService implements ShortUrlServiceInterface
 {
     private UrlRepositoryInterface $urlRepository;
+    private UrlValidator $urlValidator;
 
-    public function __construct(UrlRepositoryInterface $urlRepository)
-    {
+    public function __construct(
+        UrlRepositoryInterface $urlRepository,
+        UrlValidator $urlValidator
+    ) {
         $this->urlRepository = $urlRepository;
+        $this->urlValidator = $urlValidator;
     }
 
     /**
-     * @param string $url
-     * @return string
-     * @throws Exception
+     * @inheritDoc
      */
     public function create(string $url): string
     {
+        $this->urlValidator->validate($url);
+        if ($hash = $this->urlRepository->findHashByUrl($url)) {
+            return (new ShortUrl($hash))->getShortUrl();
+        }
+
         $hash = (new Url($url))->generateHash();
         if (!$this->urlRepository->save($hash, $url)) {
             throw new Exception('Saving error');
@@ -32,11 +41,9 @@ class ShortUrlService
     }
 
     /**
-     * @param string $hash
-     * @return string|null
-     * @throws Exception
+     * @inheritDoc
      */
-    public function get(string $hash): ?string
+    public function get(string $hash): string
     {
         $url = $this->urlRepository->findUrlByHash($hash);
         if (!$url) {

@@ -8,7 +8,10 @@ class Db
 {
     private static ?PDO $connection = null;
 
-    public static function getConnection()
+    /**
+     * @return PDO
+     */
+    public static function getConnection(): PDO
     {
         if (!static::$connection) {
             static::setConnection();
@@ -17,7 +20,7 @@ class Db
         return static::$connection;
     }
 
-    private static function setConnection()
+    private static function setConnection(): void
     {
         $user = getenv('DB_USER');
         $password = getenv('DB_PASSWORD');
