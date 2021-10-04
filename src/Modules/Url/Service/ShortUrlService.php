@@ -11,16 +11,10 @@ use src\Modules\Url\ValueObject\Url;
 
 class ShortUrlService implements ShortUrlServiceInterface
 {
-    private UrlRepositoryInterface $urlRepository;
-    private UrlValidator $urlValidator;
-
     public function __construct(
-        UrlRepositoryInterface $urlRepository,
-        UrlValidator $urlValidator
-    ) {
-        $this->urlRepository = $urlRepository;
-        $this->urlValidator = $urlValidator;
-    }
+        private UrlRepositoryInterface $urlRepository,
+        private UrlValidator $urlValidator
+    ) {}
 
     /**
      * @inheritDoc

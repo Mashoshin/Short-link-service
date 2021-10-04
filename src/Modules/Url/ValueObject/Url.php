@@ -4,12 +4,7 @@ namespace src\Modules\Url\ValueObject;
 
 class Url
 {
-    private string $url;
-
-    public function __construct(string $url)
-    {
-        $this->url = $url;
-    }
+    public function __construct(private string $url) {}
 
     /**
      * @return string

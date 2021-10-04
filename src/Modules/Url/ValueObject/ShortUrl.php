@@ -4,12 +4,7 @@ namespace src\Modules\Url\ValueObject;
 
 class ShortUrl
 {
-    private string $hash;
-
-    public function __construct(string $hash)
-    {
-        $this->hash = $hash;
-    }
+    public function __construct(private string $hash) {}
 
     /**
      * @return string

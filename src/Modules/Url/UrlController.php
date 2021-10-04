@@ -10,12 +10,7 @@ use src\Modules\Url\Contract\ShortUrlServiceInterface;
 
 class UrlController
 {
-    private ShortUrlServiceInterface $shortUrlService;
-
-    public function __construct(ShortUrlServiceInterface $shortUrlService)
-    {
-        $this->shortUrlService = $shortUrlService;
-    }
+    public function __construct(private ShortUrlServiceInterface $shortUrlService) {}
 
     public function get(Request $request, Response $response, $args)
     {
