@@ -11,6 +11,6 @@ class Url
      */
     public function generateHash(): string
     {
-        return md5(uniqid($this->url, true));
+        return substr(md5(uniqid($this->url, true)), 0, 10);
     }
 }
